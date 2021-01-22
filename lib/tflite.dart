@@ -7,12 +7,11 @@ import 'package:flutter/services.dart';
 class Tflite {
   static const MethodChannel _channel = const MethodChannel('tflite');
 
-  static Future<String> loadModel(
-      {@required String model,
-      String labels = "",
-      int numThreads = 1,
-      bool isAsset = true,
-      bool useGpuDelegate = false}) async {
+  static Future<String> loadModel({@required String model,
+    String labels = "",
+    int numThreads = 1,
+    bool isAsset = true,
+    bool useGpuDelegate = false}) async {
     return await _channel.invokeMethod(
       'loadModel',
       {
@@ -25,13 +24,12 @@ class Tflite {
     );
   }
 
-  static Future<List> runModelOnImage(
-      {@required String path,
-      double imageMean = 117.0,
-      double imageStd = 1.0,
-      int numResults = 5,
-      double threshold = 0.1,
-      bool asynch = true}) async {
+  static Future<List> runModelOnImage({@required String path,
+    double imageMean = 117.0,
+    double imageStd = 1.0,
+    int numResults = 5,
+    double threshold = 0.1,
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runModelOnImage',
       {
@@ -45,11 +43,10 @@ class Tflite {
     );
   }
 
-  static Future<List> runModelOnBinary(
-      {@required Uint8List binary,
-      int numResults = 5,
-      double threshold = 0.1,
-      bool asynch = true}) async {
+  static Future<List> runModelOnBinary({@required Uint8List binary,
+    int numResults = 5,
+    double threshold = 0.1,
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runModelOnBinary',
       {
@@ -61,16 +58,15 @@ class Tflite {
     );
   }
 
-  static Future<List> runModelOnFrame(
-      {@required List<Uint8List> bytesList,
-      int imageHeight = 1280,
-      int imageWidth = 720,
-      double imageMean = 127.5,
-      double imageStd = 127.5,
-      int rotation = 90, // Android only
-      int numResults = 5,
-      double threshold = 0.1,
-      bool asynch = true}) async {
+  static Future<List> runModelOnFrame({@required List<Uint8List> bytesList,
+    int imageHeight = 1280,
+    int imageWidth = 720,
+    double imageMean = 127.5,
+    double imageStd = 127.5,
+    int rotation: 90, // Android only
+    int numResults = 5,
+    double threshold = 0.1,
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runModelOnFrame',
       {
@@ -196,12 +192,11 @@ class Tflite {
     return await _channel.invokeMethod('close');
   }
 
-  static Future<Uint8List> runPix2PixOnImage(
-      {@required String path,
-      double imageMean = 0,
-      double imageStd = 255.0,
-      String outputType = "png",
-      bool asynch = true}) async {
+  static Future<Uint8List> runPix2PixOnImage({@required String path,
+    double imageMean = 0,
+    double imageStd = 255.0,
+    String outputType = "png",
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runPix2PixOnImage',
       {
@@ -214,10 +209,9 @@ class Tflite {
     );
   }
 
-  static Future<Uint8List> runPix2PixOnBinary(
-      {@required Uint8List binary,
-      String outputType = "png",
-      bool asynch = true}) async {
+  static Future<Uint8List> runPix2PixOnBinary({@required Uint8List binary,
+    String outputType = "png",
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runPix2PixOnBinary',
       {
@@ -255,36 +249,77 @@ class Tflite {
 
   // https://github.com/meetshah1995/pytorch-semseg/blob/master/ptsemseg/loader/pascal_voc_loader.py
   static List<int> pascalVOCLabelColors = [
-    Color.fromARGB(255, 0, 0, 0).value, // background
-    Color.fromARGB(255, 128, 0, 0).value, // aeroplane
-    Color.fromARGB(255, 0, 128, 0).value, // biyclce
-    Color.fromARGB(255, 128, 128, 0).value, // bird
-    Color.fromARGB(255, 0, 0, 128).value, // boat
-    Color.fromARGB(255, 128, 0, 128).value, // bottle
-    Color.fromARGB(255, 0, 128, 128).value, // bus
-    Color.fromARGB(255, 128, 128, 128).value, // car
-    Color.fromARGB(255, 64, 0, 0).value, // cat
-    Color.fromARGB(255, 192, 0, 0).value, // chair
-    Color.fromARGB(255, 64, 128, 0).value, // cow
-    Color.fromARGB(255, 192, 128, 0).value, // diningtable
-    Color.fromARGB(255, 64, 0, 128).value, // dog
-    Color.fromARGB(255, 192, 0, 128).value, // horse
-    Color.fromARGB(255, 64, 128, 128).value, // motorbike
-    Color.fromARGB(255, 192, 128, 128).value, // person
-    Color.fromARGB(255, 0, 64, 0).value, // potted plant
-    Color.fromARGB(255, 128, 64, 0).value, // sheep
-    Color.fromARGB(255, 0, 192, 0).value, // sofa
-    Color.fromARGB(255, 128, 192, 0).value, // train
-    Color.fromARGB(255, 0, 64, 128).value, // tv-monitor
+    Color
+        .fromARGB(255, 0, 0, 0)
+        .value, // background
+    Color
+        .fromARGB(255, 128, 0, 0)
+        .value, // aeroplane
+    Color
+        .fromARGB(255, 0, 128, 0)
+        .value, // biyclce
+    Color
+        .fromARGB(255, 128, 128, 0)
+        .value, // bird
+    Color
+        .fromARGB(255, 0, 0, 128)
+        .value, // boat
+    Color
+        .fromARGB(255, 128, 0, 128)
+        .value, // bottle
+    Color
+        .fromARGB(255, 0, 128, 128)
+        .value, // bus
+    Color
+        .fromARGB(255, 128, 128, 128)
+        .value, // car
+    Color
+        .fromARGB(255, 64, 0, 0)
+        .value, // cat
+    Color
+        .fromARGB(255, 192, 0, 0)
+        .value, // chair
+    Color
+        .fromARGB(255, 64, 128, 0)
+        .value, // cow
+    Color
+        .fromARGB(255, 192, 128, 0)
+        .value, // diningtable
+    Color
+        .fromARGB(255, 64, 0, 128)
+        .value, // dog
+    Color
+        .fromARGB(255, 192, 0, 128)
+        .value, // horse
+    Color
+        .fromARGB(255, 64, 128, 128)
+        .value, // motorbike
+    Color
+        .fromARGB(255, 192, 128, 128)
+        .value, // person
+    Color
+        .fromARGB(255, 0, 64, 0)
+        .value, // potted plant
+    Color
+        .fromARGB(255, 128, 64, 0)
+        .value, // sheep
+    Color
+        .fromARGB(255, 0, 192, 0)
+        .value, // sofa
+    Color
+        .fromARGB(255, 128, 192, 0)
+        .value, // train
+    Color
+        .fromARGB(255, 0, 64, 128)
+        .value, // tv-monitor
   ];
 
-  static Future<Uint8List> runSegmentationOnImage(
-      {@required String path,
-      double imageMean = 0,
-      double imageStd = 255.0,
-      List<int> labelColors,
-      String outputType = "png",
-      bool asynch = true}) async {
+  static Future<Uint8List> runSegmentationOnImage({@required String path,
+    double imageMean = 0,
+    double imageStd = 255.0,
+    List<int> labelColors,
+    String outputType = "png",
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runSegmentationOnImage',
       {
@@ -298,11 +333,10 @@ class Tflite {
     );
   }
 
-  static Future<Uint8List> runSegmentationOnBinary(
-      {@required Uint8List binary,
-      List<int> labelColors,
-      String outputType = "png",
-      bool asynch = true}) async {
+  static Future<Uint8List> runSegmentationOnBinary({@required Uint8List binary,
+    List<int> labelColors,
+    String outputType = "png",
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runSegmentationOnBinary',
       {
@@ -316,14 +350,14 @@ class Tflite {
 
   static Future<Uint8List> runSegmentationOnFrame(
       {@required List<Uint8List> bytesList,
-      int imageHeight = 1280,
-      int imageWidth = 720,
-      double imageMean = 0,
-      double imageStd = 255.0,
-      int rotation: 90, // Android only
-      List<int> labelColors,
-      String outputType = "png",
-      bool asynch = true}) async {
+        int imageHeight = 1280,
+        int imageWidth = 720,
+        double imageMean = 0,
+        double imageStd = 255.0,
+        int rotation: 90, // Android only
+        List<int> labelColors,
+        String outputType = "png",
+        bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runSegmentationOnFrame',
       {
@@ -340,14 +374,13 @@ class Tflite {
     );
   }
 
-  static Future<List> runPoseNetOnImage(
-      {@required String path,
-      double imageMean = 127.5,
-      double imageStd = 127.5,
-      int numResults = 5,
-      double threshold = 0.5,
-      int nmsRadius = 20,
-      bool asynch = true}) async {
+  static Future<List> runPoseNetOnImage({@required String path,
+    double imageMean = 127.5,
+    double imageStd = 127.5,
+    int numResults = 5,
+    double threshold = 0.5,
+    int nmsRadius = 20,
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runPoseNetOnImage',
       {
@@ -362,12 +395,11 @@ class Tflite {
     );
   }
 
-  static Future<List> runPoseNetOnBinary(
-      {@required Uint8List binary,
-      int numResults = 5,
-      double threshold = 0.5,
-      int nmsRadius = 20,
-      bool asynch = true}) async {
+  static Future<List> runPoseNetOnBinary({@required Uint8List binary,
+    int numResults = 5,
+    double threshold = 0.5,
+    int nmsRadius = 20,
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runPoseNetOnBinary',
       {
@@ -380,17 +412,17 @@ class Tflite {
     );
   }
 
-  static Future<List> runPoseNetOnFrame(
-      {@required List<Uint8List> bytesList,
-      int imageHeight = 1280,
-      int imageWidth = 720,
-      double imageMean = 127.5,
-      double imageStd = 127.5,
-      int rotation: 90, // Android only
-      int numResults = 5,
-      double threshold = 0.5,
-      int nmsRadius = 20,
-      bool asynch = true}) async {
+  static Future<List> runPoseNetOnFrame({@required List<Uint8List> bytesList,
+    int imageHeight = 1280,
+    int imageWidth = 720,
+    double imageMean = 127.5,
+    double imageStd = 127.5,
+    int rotation: 90, // Android only
+    int numResults = 5,
+    double threshold = 0.5,
+    int nmsRadius = 20,
+    double hiddenRatio = 0.27,
+    bool asynch = true}) async {
     return await _channel.invokeMethod(
       'runPoseNetOnFrame',
       {
@@ -403,6 +435,7 @@ class Tflite {
         "numResults": numResults,
         "threshold": threshold,
         "nmsRadius": nmsRadius,
+        "hiddenRatio": hiddenRatio,
         "asynch": asynch,
       },
     );
